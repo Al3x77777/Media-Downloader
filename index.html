@@ -74,7 +74,7 @@
         <h1>Media Downloader</h1>
         <input type="text" id="urlInput" placeholder="Enter URL..." />
         <button id="downloadButton">Download!</button>
-        <button id="downloadMp3Button">Download! (MP3)</button>
+        <button id="downloadWavButton">Download! (WAV)</button>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
@@ -87,13 +87,13 @@
             await handleDownload('720');
         });
 
-        document.getElementById('downloadMp3Button').addEventListener('click', async function() {
-            await handleDownload('mp3');
+        document.getElementById('downloadWavButton').addEventListener('click', async function() {
+            await handleDownload('wav');
         });
 
         async function handleDownload(format) {
             const userUrl = document.getElementById('urlInput').value;
-            const apiUrl = `https://ab.cococococ.com/ajax/download.php?format=${format}&url=${encodeURIComponent(userUrl)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`;
+            const apiUrl = `https://ab.cococococ.com/ajax/download.php?format=${format}&url=${encodeURIComponent(userUrl)}`;
 
             try {
                 const response = await fetch(apiUrl);
@@ -127,7 +127,7 @@
                     } catch (error) {
                         clearInterval(intervalId);
                         progressContainer.style.display = 'none';
-                        downloadLinkElement.textContent = 'An Error Occurred! Please Try Again!';
+                        downloadLinkElement.textContent = 'An Error Occurred! Please Try Again Later!';
                         downloadLinkElement.style.display = 'block';
                     }
                 };
@@ -141,7 +141,7 @@
                 }
 
             } catch (error) {
-                document.getElementById('downloadLink').textContent = 'An Error Occurred! Please Try Again!';
+                document.getElementById('downloadLink').textContent = 'An Error Occurred! Please Try Again Later!';
                 document.getElementById('downloadLink').style.display = 'block';
             }
         }
