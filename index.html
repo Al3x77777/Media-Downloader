@@ -74,7 +74,7 @@
         <h1>Media Downloader</h1>
         <input type="text" id="urlInput" placeholder="Enter URL..." />
         <button id="downloadButton">Download!</button>
-        <button id="downloadMp3Button">Download! (MP3)</button>
+        <button id="downloadWavButton">Download! (WAV)</button>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
@@ -87,8 +87,8 @@
             await handleDownload('720');
         });
 
-        document.getElementById('downloadMp3Button').addEventListener('click', async function() {
-            await handleDownload('mp3');
+        document.getElementById('downloadWavButton').addEventListener('click', async function() {
+            await handleDownload('wav');
         });
 
         async function handleDownload(format) {
@@ -97,11 +97,6 @@
 
             try {
                 const response = await fetch(apiUrl);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-
                 const data = await response.json();
                 const responseId = data.id;
 
@@ -115,11 +110,6 @@
                 const checkDownloadUrl = async () => {
                     try {
                         const progressResponse = await fetch(progressUrl);
-
-                        if (!progressResponse.ok) {
-                            throw new Error(`HTTP Error: ${progressResponse.status}`);
-                        }
-
                         const progressData = await progressResponse.json();
                         const downloadUrl = progressData.download_url;
                         const progress = progressData.progress;
@@ -137,7 +127,7 @@
                     } catch (error) {
                         clearInterval(intervalId);
                         progressContainer.style.display = 'none';
-                        downloadLinkElement.textContent = `An Error Occurred! Please Try Again Later! ${error.message}`;
+                        downloadLinkElement.textContent = 'An Error Occurred! Please Try Again Later!';
                         downloadLinkElement.style.display = 'block';
                     }
                 };
@@ -151,7 +141,7 @@
                 }
 
             } catch (error) {
-                document.getElementById('downloadLink').textContent = `An Error Occurred! Please Try Again Later! ${error.message}`;
+                document.getElementById('downloadLink').textContent = 'An Error Occurred! Please Try Again Later!';
                 document.getElementById('downloadLink').style.display = 'block';
             }
         }
