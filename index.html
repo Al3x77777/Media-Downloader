@@ -42,6 +42,11 @@
         button:hover {
             background-color: #3700b3;
         }
+        #downloadLink {
+            display: none;
+            margin-top: 10px;
+            font-size: 16px;
+        }
         .progress-container {
             width: 100%;
             background-color: #ccc;
@@ -69,7 +74,7 @@
         <h1>Media Downloader</h1>
         <input type="text" id="urlInput" placeholder="Enter URL..." />
         <button id="downloadButton">Download!</button>
-        <button id="downloadWavButton">Download! (WAV)</button>
+        <button id="downloadMp3Button">Download! (MP3)</button>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
@@ -82,8 +87,8 @@
             await handleDownload('720');
         });
 
-        document.getElementById('downloadWavButton').addEventListener('click', async function() {
-            await handleDownload('wav');
+        document.getElementById('downloadMp3Button').addEventListener('click', async function() {
+            await handleDownload('mp3');
         });
 
         async function handleDownload(format) {
